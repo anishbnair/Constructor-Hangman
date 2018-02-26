@@ -1,4 +1,4 @@
 # Constructor-Hangman
 
-## Screenshots
+## Screenshot
 ![Hangman](/images/hangman.png)

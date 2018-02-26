@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/anishbnair/Constructor-Hangman#readme",
   "dependencies": {
+    "chalk": "^2.3.1",
     "inquirer": "^5.1.0",
     "request": "^2.83.0"
   }

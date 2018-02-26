@@ -1,6 +1,9 @@
 
-// Link in the Inquirer Package
+// Load the Inquirer Package
 var inquirer = require('inquirer');
+
+// Load the chalk Package
+var chalk = require('chalk');
 
 // Link the list of random words
 var guessWordList = require('./wordList.js');
@@ -35,13 +38,14 @@ var game = {
         var randomWord = Math.floor(Math.random() * this.wordBank.length);
         this.currentWrd = this.wordBank[randomWord];
 
+        console.log('\n');
         // Inform User game has begun
-        console.log('Guess the country name');
+        console.log(chalk.yellowBright('Welcome to Hangman game!!! Guess the country name:'));
 
         // Show the empty letters ( _ _ _ _ ) and guesses, etc.
         displayHangman = new Letters(this.currentWrd);
         displayHangman.display();
-        console.log('Guesses Left: ' + game.guessesRemaining);
+        console.log(chalk.yellowBright('Guesses Left: ' + game.guessesRemaining));
 
         // prompt for a letter
         promptLetter();
@@ -53,7 +57,7 @@ var game = {
 // User Prompt Function
 function promptLetter() {
 
-    // Always make a gap between inputs
+    // Always make a gap between inputsnode
     console.log('');
 
     // If enough guesses left, then prompt for new letter
@@ -62,7 +66,7 @@ function promptLetter() {
             {
                 type: "value",
                 name: "letter",
-                message: "Guess a Letter: "
+                message: chalk.yellowBright("Guess a Letter: ")
             }
         ]).then(function (userInput) {
 
@@ -73,18 +77,18 @@ function promptLetter() {
             if (alphabet.indexOf(inputLetter) == -1) {
 
                 // Tell user they did not guess a letter
-                console.log('Sorry, "' + inputLetter + '" is not a letter. Try again!');
-                console.log('Guesses Left: ' + game.guessesRemaining);
-                console.log('Letters already guessed: ' + lettersAlreadyGuessed);
+                console.log(chalk.yellowBright('Sorry, "' + inputLetter + '" is not a letter. Try again!'));
+                console.log(chalk.yellowBright('Guesses Left: ' + game.guessesRemaining));
+                console.log(chalk.yellowBright('Letters already guessed: ' + lettersAlreadyGuessed));
                 promptLetter();
 
             }
             else if (alphabet.indexOf(inputLetter) != -1 && lettersAlreadyGuessed.indexOf(inputLetter) != -1) {
 
                 // Tell user they already guessed that letter
-                console.log('You already guessed "' + inputLetter + '". Try again!');
-                console.log('Guesses Left: ' + game.guessesRemaining);
-                console.log('Letters already guessed: ' + lettersAlreadyGuessed);
+                console.log(chalk.yellowBright('You already guessed "' + inputLetter + '". Try again!'));
+                console.log(chalk.yellowBright('Guesses Left: ' + game.guessesRemaining));
+                console.log(chalk.yellowBright('Letters already guessed: ' + lettersAlreadyGuessed));
                 promptLetter();
 
             }
@@ -110,14 +114,14 @@ function promptLetter() {
 
                     // Test if the user has won
                     if (displayHangman.winner) {
-                        console.log('You win! Congrats!');
+                        console.log(chalk.yellowBright('You win! Congrats!'));
                         // continueGame();
                         // return;
                     }
                     // Not a win yet, so ask for another input and decrement guesses
                     else {
-                        console.log('Guesses Left: ' + game.guessesRemaining);
-                        console.log('Letters already guessed: ' + lettersAlreadyGuessed);
+                        console.log(chalk.yellowBright('Guesses Left: ' + game.guessesRemaining));
+                        console.log(chalk.yellowBright('Letters already guessed: ' + lettersAlreadyGuessed));
                         promptLetter();
                     }
 
@@ -127,8 +131,8 @@ function promptLetter() {
                     game.guessesRemaining--;
 
                     displayHangman.display();
-                    console.log('Guesses Left: ' + game.guessesRemaining);
-                    console.log('Letters already guessed: ' + lettersAlreadyGuessed);
+                    console.log(chalk.yellowBright('Guesses Left: ' + game.guessesRemaining));
+                    console.log(chalk.yellowBright('Letters already guessed: ' + lettersAlreadyGuessed));
                     promptLetter();
                 }
 
@@ -139,7 +143,7 @@ function promptLetter() {
     }
     // If not enough guesses left, then user losses
     else {
-        console.log('You lost. Try again. The word was "' + game.currentWrd + '".');
+        console.log(chalk.yellowBright('You lost. Try again. The word was "' + game.currentWrd + '".'));
         // continueGame();
     }
 
